@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import Modal from "../components/CreateProjectModal";
+import { useState } from "react";
 
 const bannerImgUrl =
   "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717779687/Group_16_bwhew7.png";
 
 const Home = () => {
+  const [newProjectModal, setNewProjectModal] = useState(false);
+
+  const openModal = () => {
+    setNewProjectModal(true);
+  };
+
+  const closeModal = () => {
+    setNewProjectModal(false);
+  };
+
   const renderBackToHomeButton = () => {
     const homeIconUrl =
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717777341/home_1_xnwme8.png";
@@ -25,7 +37,7 @@ const Home = () => {
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717780843/Vector_bw3yo2.png";
 
     return (
-      <Button>
+      <Button onClick={openModal}>
         <img className="plus-icon" src={plusIconUrl} alt="plus" />
         <span>Create New Project</span>
       </Button>
@@ -34,9 +46,7 @@ const Home = () => {
 
   return (
     <MainContainer>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
       <Main>
         {renderBackToHomeButton()}
         <h1 className="main-heading">Create a New Project</h1>
@@ -49,6 +59,7 @@ const Home = () => {
           reprehenderit in
         </p>
         {renderCreateNewProjectButton()}
+        {newProjectModal && <Modal closeModal={closeModal} />}
       </Main>
     </MainContainer>
   );
