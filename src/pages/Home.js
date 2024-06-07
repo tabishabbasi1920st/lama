@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
 import Modal from "../components/CreateProjectModal";
 import { useState } from "react";
+import BackToHomeButton from "../components/BackToHomeButton";
 
 const bannerImgUrl =
   "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717779687/Group_16_bwhew7.png";
@@ -16,20 +16,6 @@ const Home = () => {
 
   const closeModal = () => {
     setNewProjectModal(false);
-  };
-
-  const renderBackToHomeButton = () => {
-    const homeIconUrl =
-      "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717777341/home_1_xnwme8.png";
-
-    return (
-      <Link to={"/home"}>
-        <BackToHomeBtn>
-          <img className="home-icon" src={homeIconUrl} alt={"home icon"} />
-          <span>Back to Home</span>
-        </BackToHomeBtn>
-      </Link>
-    );
   };
 
   const renderCreateNewProjectButton = () => {
@@ -48,7 +34,7 @@ const Home = () => {
     <MainContainer>
       <Navbar />
       <Main>
-        {renderBackToHomeButton()}
+        <BackToHomeButton />
         <h1 className="main-heading">Create a New Project</h1>
         <img className="banner-img" src={bannerImgUrl} alt={"banner"} />
         <p className="banner-para">
@@ -103,32 +89,6 @@ const Main = styled.main`
     font-family: "Roboto";
     font-size: 1.5em;
     color: #838383;
-  }
-`;
-
-const BackToHomeBtn = styled.button`
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 3px 15px 3px 15px;
-  border-radius: 15px;
-  font-family: "Roboto", sans-serif;
-  color: #3c3c3c;
-  border: 0.75px solid #999999;
-  font-weight: 500;
-  font-size: 16px;
-  background: #ffffff;
-  box-shadow: 1px 5px 5px 0.1px rgba(126, 34, 206, 0.1);
-  cursor: pointer;
-  &:hover {
-    box-shadow: 1px 5px 5px 0.1px rgba(126, 34, 206, 0.2);
-  }
-
-  .home-icon {
-    height: 25px;
-    width: 25px;
   }
 `;
 
