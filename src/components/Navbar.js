@@ -19,7 +19,7 @@ const navLinks = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({ showLinks }) => {
   const getLinkItem = (link) => {
     const { id, route, iconUrl } = link;
     return (
@@ -35,9 +35,11 @@ const Navbar = () => {
     <MainContainer>
       <LogoImg src={logoUrl} alt="logo" />
       <LogoTxt>LAMA.</LogoTxt>
-      <LinksContainer>
-        {navLinks.map((eachLink) => getLinkItem(eachLink))}
-      </LinksContainer>
+      {showLinks && (
+        <LinksContainer>
+          {navLinks.map((eachLink) => getLinkItem(eachLink))}
+        </LinksContainer>
+      )}
     </MainContainer>
   );
 };

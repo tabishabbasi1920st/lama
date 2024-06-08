@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const ProjectsCard = ({ cardData }) => {
-  const { projectName, totalEpisodes, lastModified } = cardData;
+  const { id, projectName, totalEpisodes, lastModified } = cardData;
+
+  const navigate = useNavigate();
 
   const getDpChars = () => {
     const projectNameTerms = projectName.split(" ");
@@ -9,7 +12,7 @@ const ProjectsCard = ({ cardData }) => {
     for (let x of projectNameTerms) {
       dpChars += x[0];
     }
-    return dpChars;
+    return dpChars.toUpperCase().slice(0, 2);
   };
 
   const getRandomColor = () => {
@@ -19,8 +22,15 @@ const ProjectsCard = ({ cardData }) => {
     return randomColorsList[randomNumber];
   };
 
+  const handleCardClick = () => {
+    navigate(`/projects/${id}`);
+  };
+
   return (
-    <MainContainer bgAndProjNameColor={getRandomColor()}>
+    <MainContainer
+      bgAndProjNameColor={getRandomColor()}
+      onClick={handleCardClick}
+    >
       <div className="dp-container">
         <h1 className="dp-chars" style={{ color: "#fff" }}>
           {getDpChars()}

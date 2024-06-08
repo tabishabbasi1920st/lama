@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <MainContainer ref={mainContainerRef}>
-      <Navbar />
+      <Navbar showLinks={true} />
       <Main>
         <BackToHomeButton />
         <h1 className="main-heading">Create a New Project</h1>
