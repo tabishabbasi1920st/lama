@@ -23,8 +23,8 @@ const Navbar = () => {
   const getLinkItem = (link) => {
     const { id, route, iconUrl } = link;
     return (
-      <Link to={route}>
-        <li key={id}>
+      <Link key={id} to={route}>
+        <li>
           <LinkIcon src={iconUrl} alt={id} />
         </li>
       </Link>

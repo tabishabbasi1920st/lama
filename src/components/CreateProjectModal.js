@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Modal = ({ closeModal }) => {
+const Modal = ({ closeModal, parentContRef }) => {
   const errorTxt = "Project Name Can't be empty";
 
   const renderLabelAndInputField = () => {
@@ -29,7 +29,7 @@ const Modal = ({ closeModal }) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer height={parentContRef.current.offsetHeight}>
       <Card>
         <h2 className="create-proj-heading">Create Project</h2>
         {renderLabelAndInputField()}
@@ -49,10 +49,10 @@ const MainContainer = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 100vh;
+  height: ${({ height }) => `${height}px`};
   width: 100%;
   overflow: hidden;
-  background-color: rgba(217, 217, 217, 0.5);
+  background-color: rgba(217, 217, 217, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;

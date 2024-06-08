@@ -5,12 +5,12 @@ const BackToHomeButton = () => {
   const homeIconUrl =
     "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717777341/home_1_xnwme8.png";
   return (
-    <Link to={"/"}>
+    <CustomLink to={"/"}>
       <BackToHomeBtn>
         <img className="home-icon" src={homeIconUrl} alt={"home icon"} />
         <span>Back to Home</span>
       </BackToHomeBtn>
-    </Link>
+    </CustomLink>
   );
 };
 
@@ -40,4 +40,9 @@ const BackToHomeBtn = styled.button`
     height: 25px;
     width: 25px;
   }
+`;
+
+const CustomLink = styled(Link)`
+  color: #3c3c3c;
+  display: inline-block;
 `;
