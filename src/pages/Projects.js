@@ -1,71 +1,19 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import BackToHomeButton from "../components/BackToHomeButton";
 import CreateProjectModal from "../components/CreateProjectModal";
 import CreateNewProjectButton from "../components/CreateNewProjectButton";
-import { v4 as uuidv4 } from "uuid";
 import ProjectsCard from "../components/ProjectsCard";
 
-const projects = [
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-  {
-    id: uuidv4(),
-    projectName: "Sample Project",
-    totalEpisodes: 4,
-    lastModified: "Last edited a week ago",
-  },
-];
+import { LamaContext } from "../context/LamaContext.js";
+import { useContext } from "react";
 
 const Projects = () => {
+  const { projects } = useContext(LamaContext);
+
   const [newProjectModal, setNewProjectModal] = useState(false);
+
   const mainContainerRef = useRef();
 
   const openModal = () => {

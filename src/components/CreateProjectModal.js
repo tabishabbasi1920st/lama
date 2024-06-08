@@ -1,13 +1,65 @@
+import { useState, useContext } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate, useLocation } from "react-router-dom";
+import { LamaContext } from "../context/LamaContext";
 
 const Modal = ({ closeModal, parentContRef }) => {
-  const errorTxt = "Project Name Can't be empty";
+  const [inputValue, setInputValue] = useState("");
+  const [errorTxt, setErrorTxt] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { setProjects } = useContext(LamaContext);
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const formValidation = () => {
+    if (inputValue === "") {
+      setErrorTxt("Project Name Can't be empty");
+      return false;
+    }
+
+    setErrorTxt("");
+    return true;
+  };
+
+  const addNewProject = () => {
+    const newProject = {
+      id: uuidv4(),
+      projectName: inputValue,
+      totalEpisodes: 0,
+      lastModified: "Last edited now",
+    };
+
+    return newProject;
+  };
+
+  const handleFormSubmit = () => {
+    if (formValidation() === true) {
+      setProjects((prevList) => [addNewProject(), ...prevList]);
+
+      setInputValue("");
+      closeModal();
+      if (location.pathname !== "/projects") {
+        navigate("/projects");
+      }
+    }
+  };
 
   const renderLabelAndInputField = () => {
     return (
       <FieldContainer>
         <CustomLabel>Enter Project Name:</CustomLabel>
-        <CustomInput type="text" placeholder="Type here" />
+        <CustomInput
+          value={inputValue}
+          type="text"
+          placeholder="Type here"
+          onChange={handleChange}
+        />
       </FieldContainer>
     );
   };
@@ -22,7 +74,12 @@ const Modal = ({ closeModal, parentContRef }) => {
 
   const renderCreateButton = () => {
     return (
-      <CustomButton bgColor="#7E22CE" color="#ffffff">
+      <CustomButton
+        type="submit"
+        bgColor="#7E22CE"
+        color="#ffffff"
+        onClick={handleFormSubmit}
+      >
         Create
       </CustomButton>
     );
