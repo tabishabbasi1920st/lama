@@ -19,8 +19,8 @@ const Button = styled.button`
   color: #f8f8f8;
   display: block;
   margin-top: 20px;
-  height: 45px;
-  width: 215px;
+  height: 50px;
+  width: 250px;
   font-family: "Roboto";
   font-weight: 400;
   border-radius: 5px;
@@ -30,7 +30,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-size: 18px;
+  font-size: 1.4rem;
   cursor: pointer;
   &:hover {
     background-color: rgba(33, 25, 53, 0.95);

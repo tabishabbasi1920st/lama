@@ -1,16 +1,14 @@
 import styled from "styled-components";
-import Sidebar from "../components/Sidebar";
 
 const WidgetConfigurations = () => {
-  return (
-    <MainContainer>
-      <Sidebar>widget</Sidebar>
-    </MainContainer>
-  );
+  return <MainContainer>Widget Configuration</MainContainer>;
 };
 
 export default WidgetConfigurations;
 
 const MainContainer = styled.div`
-  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  border: 2px solid red;
+  overflow: auto;
 `;

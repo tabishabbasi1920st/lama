@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LamaContext } from "../context/lamaContext";
 
 const ProjectsCard = ({ cardData }) => {
-  const { projectName, totalEpisodes, lastModified } = cardData;
+  const { id, projectName, totalEpisodes, lastModified } = cardData;
 
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const ProjectsCard = ({ cardData }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/project-details`);
+    navigate(`/project-details/${id}`);
   };
 
   return (
@@ -49,7 +51,7 @@ export default ProjectsCard;
 
 const MainContainer = styled.li`
   display: flex;
-  height: 95px;
+  height: 110px;
   width: 30%;
   border: 2px solid green;
   border-radius: 10px;
@@ -72,7 +74,7 @@ const MainContainer = styled.li`
 
   .dp-container {
     height: 100%;
-    width: 90px;
+    width: 100px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -99,11 +101,11 @@ const MainContainer = styled.li`
   .project-name {
     color: ${({ bgAndProjNameColor }) => bgAndProjNameColor};
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.5rem;
   }
 
   .episode-count {
-    font-size: 12px;
+    font-size: 1rem;
     color: #3c3c3c;
     margin-top: 2px;
   }

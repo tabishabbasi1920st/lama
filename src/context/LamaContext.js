@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { act, createContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export const LamaContext = createContext();

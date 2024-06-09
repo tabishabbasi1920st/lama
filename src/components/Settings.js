@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "./Sidebar";
 
-const Pricing = () => {
+const Settings = () => {
   return (
     <MainContainer>
       <Sidebar>tabish</Sidebar>
@@ -9,7 +9,7 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default Settings;
 
 const MainContainer = styled.div`
   overflow: hidden;

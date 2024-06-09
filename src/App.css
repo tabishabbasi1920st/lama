@@ -5,3 +5,7 @@
   list-style-type: none;
   text-decoration: none;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

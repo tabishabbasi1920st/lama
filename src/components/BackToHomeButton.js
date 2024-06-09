@@ -17,7 +17,7 @@ const BackToHomeButton = () => {
 export default BackToHomeButton;
 
 const BackToHomeBtn = styled.button`
-  height: 35px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@ const BackToHomeBtn = styled.button`
   color: #3c3c3c;
   border: 0.75px solid #999999;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.2rem;
   background: #ffffff;
   box-shadow: 1px 5px 5px 0.1px rgba(126, 34, 206, 0.1);
   cursor: pointer;

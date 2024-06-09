@@ -1,31 +1,29 @@
 import styled from "styled-components";
 import Navbar from "./Navbar";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const sidebarLinks = [
   {
     id: "PROJECT",
     name: "Project",
-    route: `/project-details`,
   },
   {
     id: "WIDGET_CONFIGURATION",
     name: "Widget-Configuration",
-    route: `/widget-configuration`,
   },
   {
     id: "DEPLOYMENT",
     name: "Deployment",
-    route: `/deployment`,
   },
   {
     id: "PRICING",
     name: "Pricing",
-    route: `/pricing`,
   },
 ];
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children, getActiveLinkId }) => {
+  const [activeLink, setActiveLink] = useState(sidebarLinks[0].id);
+
   return (
     <MainContainer>
       <SidebarContainer>
@@ -33,9 +31,12 @@ const Sidebar = ({ children }) => {
         <LinksContainer>
           {sidebarLinks.map((eachLink, index) => (
             <CustomNavLink
-              to={eachLink.route}
               key={eachLink.id}
-              activeClassName="active"
+              activeClassName={eachLink.id === activeLink}
+              onClick={() => {
+                setActiveLink(eachLink.id);
+                getActiveLinkId(eachLink.id);
+              }}
             >
               <div className="serial-no-div">{index + 1}</div>
               <p className="link-name">{eachLink.name}</p>
@@ -52,6 +53,7 @@ export default Sidebar;
 
 const MainContainer = styled.div`
   height: 100vh;
+  overflow: hidden;
   width: 100%;
   display: flex;
 `;
@@ -66,27 +68,28 @@ const SidebarContainer = styled.div`
 
 const MainSection = styled.main`
   max-height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   flex-grow: 1;
 `;
 
 const LinksContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 5px;
 `;
 
-const CustomNavLink = styled(NavLink)`
+const CustomNavLink = styled.li`
   display: flex;
   height: 50px;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
   font-family: "Roboto";
-  font-size: 16px;
   font-weight: 400;
   border-radius: 20px;
   padding: 7px;
   background-color: ${({ activeClassName }) => activeClassName && "#7E22CE"};
+  cursor: pointer;
+  font-size: 1.3rem;
 
   &:hover {
     background-color: ${({ activeClassName }) =>
