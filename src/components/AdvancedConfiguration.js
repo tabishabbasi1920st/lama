@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 const AdvancedConfiguration = () => {
-  return <MainContainer>AdvancedConfiguration</MainContainer>;
+  return (
+    <MainContainer>
+      <h1>Advanced</h1>
+    </MainContainer>
+  );
 };
 
 export default AdvancedConfiguration;
 
-const MainContainer = styled.div`
-  border: 2px solid red;
-`;
+const MainContainer = styled.div``;

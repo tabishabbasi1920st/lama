@@ -66,12 +66,11 @@ const LoginModal = () => {
           fontColor: "#3C3C3C",
           fontSize: 25,
           chatHeight: "LoremIpsuim",
-          showResources: true,
-          chatIconSize: "Small",
-          positionOnScreen: "Bottom Right",
-          distance: 20,
+          showSources: true,
+          chatIconSize: "Option 3",
+          positionOnScreen: "Option 1",
+          distanceFromBottom: 20,
           horizontalDistance: 20,
-          botIconUrl: "",
         },
       };
 
