@@ -4,17 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 export const LamaContext = createContext();
 
 const LamaContextProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem("lama_user"))
+  );
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("lama_user");
-    const parsedUserInfo = JSON.parse(userInfo);
-    setUserInfo(parsedUserInfo);
-  }, []);
-
-  const updateLocalStorageData = (data) => {
-    localStorage.setItem("lama_user", JSON.stringify(data));
-  };
+    localStorage.setItem("lama_user", JSON.stringify(userInfo));
+  }, [userInfo]);
 
   const [projects, setProjects] = useState([
     {
@@ -80,7 +76,6 @@ const LamaContextProvider = ({ children }) => {
         setProjects,
         userInfo,
         setUserInfo,
-        updateLocalStorageData,
       }}
     >
       {children}

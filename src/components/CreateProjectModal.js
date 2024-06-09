@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate, useLocation } from "react-router-dom";
 import { LamaContext } from "../context/lamaContext";
 
 const Modal = ({ closeModal }) => {
@@ -22,10 +21,7 @@ const Modal = ({ closeModal }) => {
   const [inputValue, setInputValue] = useState("");
   const [errorTxt, setErrorTxt] = useState("");
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const { setProjects } = useContext(LamaContext);
+  const { userInfo, setUserInfo } = useContext(LamaContext);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -54,15 +50,18 @@ const Modal = ({ closeModal }) => {
 
   const handleFormSubmit = () => {
     if (formValidation() === true) {
-      setProjects((prevList) => [addNewProject(), ...prevList]);
+      console.log("new project form submit");
+      setUserInfo((prevUserInfo) => ({
+        ...prevUserInfo,
+        projectList: [...prevUserInfo.projectList, addNewProject()],
+      }));
 
       setInputValue("");
       closeModal();
-      if (location.pathname !== "/projects") {
-        navigate("/projects");
-      }
     }
   };
+
+  console.log(userInfo);
 
   const renderLabelAndInputField = () => {
     return (

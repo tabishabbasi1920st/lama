@@ -6,6 +6,7 @@ import BackToHomeButton from "../components/BackToHomeButton";
 import CreateNewProjectButton from "../components/CreateNewProjectButton";
 import LoginModal from "../components/LoginModal";
 import { LamaContext } from "../context/lamaContext";
+import ProjectsCard from "../components/ProjectsCard";
 
 const bannerImgUrl =
   "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717779687/Group_16_bwhew7.png";
@@ -13,7 +14,8 @@ const bannerImgUrl =
 const Home = () => {
   const [newProjectModal, setNewProjectModal] = useState(false);
 
-  const { userInfo } = useContext(LamaContext);
+  const { userInfo, setUserInfo, updateLocalStorageData } =
+    useContext(LamaContext);
 
   const openModal = () => {
     setNewProjectModal(true);
@@ -23,9 +25,8 @@ const Home = () => {
     setNewProjectModal(false);
   };
 
-  return (
-    <MainContainer>
-      <Navbar showLinks={true} />
+  const renderNoProjectsView = () => {
+    return (
       <Main>
         <BackToHomeButton />
         <h1 className="main-heading">Create a New Project</h1>
@@ -42,6 +43,42 @@ const Home = () => {
           {newProjectModal && <Modal closeModal={closeModal} />}
         </div>
       </Main>
+    );
+  };
+
+  const renderProjectsView = () => {
+    return (
+      <Main>
+        <BackToHomeButton />
+        <TopContainer>
+          <h1 className="projects-heading">Projects</h1>
+          <CreateNewProjectButton openModal={openModal} />
+          {newProjectModal && <Modal closeModal={closeModal} />}
+        </TopContainer>
+        <ProjectsContainer>
+          {userInfo !== null &&
+            userInfo.projectList.map((eachObj) => (
+              <ProjectsCard cardData={eachObj} key={eachObj.id} />
+            ))}
+        </ProjectsContainer>
+      </Main>
+    );
+  };
+
+  const renderAppropriateView = () => {
+    if (userInfo === null) {
+      return renderNoProjectsView();
+    } else if (userInfo !== null && userInfo.projectList.length === 0) {
+      return renderNoProjectsView();
+    } else {
+      return renderProjectsView();
+    }
+  };
+
+  return (
+    <MainContainer>
+      <Navbar showLinks={true} />
+      {renderAppropriateView()}
       {userInfo === null && <LoginModal />}
     </MainContainer>
   );
@@ -57,6 +94,13 @@ const MainContainer = styled.div`
 
 const Main = styled.main`
   padding: 10px 10% 10px 10%;
+
+  .projects-heading {
+    color: #7e22ce;
+    font-family: "Roboto";
+    margin-top: 20px;
+    font-size: 40px;
+  }
 
   .main-heading {
     color: #7e22ce;
@@ -88,4 +132,20 @@ const Main = styled.main`
     justify-content: center;
     align-items: center;
   }
+`;
+
+//
+
+const TopContainer = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const ProjectsContainer = styled.ul`
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;

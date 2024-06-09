@@ -9,8 +9,7 @@ const LoginModal = () => {
     email: "",
   });
 
-  const { userInfo, setUserInfo, updateLocalStorageData } =
-    useContext(LamaContext);
+  const { setUserInfo } = useContext(LamaContext);
   const mainContainerRef = useRef();
 
   useEffect(() => {
@@ -56,10 +55,10 @@ const LoginModal = () => {
       const userInfo = {
         username,
         email,
+        projectList: [],
       };
 
       setUserInfo(userInfo);
-      updateLocalStorageData(userInfo);
     }
   };
 
