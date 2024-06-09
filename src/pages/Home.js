@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Modal from "../components/CreateProjectModal";
-import { useRef, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import BackToHomeButton from "../components/BackToHomeButton";
 import CreateNewProjectButton from "../components/CreateNewProjectButton";
+import LoginModal from "../components/LoginModal";
+import { LamaContext } from "../context/lamaContext";
 
 const bannerImgUrl =
   "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717779687/Group_16_bwhew7.png";
 
 const Home = () => {
   const [newProjectModal, setNewProjectModal] = useState(false);
-  const mainContainerRef = useRef();
+
+  const { userInfo } = useContext(LamaContext);
 
   const openModal = () => {
     setNewProjectModal(true);
@@ -21,7 +24,7 @@ const Home = () => {
   };
 
   return (
-    <MainContainer ref={mainContainerRef}>
+    <MainContainer>
       <Navbar showLinks={true} />
       <Main>
         <BackToHomeButton />
@@ -36,11 +39,10 @@ const Home = () => {
         </p>
         <div className="new-project-btn-container">
           <CreateNewProjectButton openModal={openModal} />
-          {newProjectModal && (
-            <Modal closeModal={closeModal} parentContRef={mainContainerRef} />
-          )}
+          {newProjectModal && <Modal closeModal={closeModal} />}
         </div>
       </Main>
+      {userInfo === null && <LoginModal />}
     </MainContainer>
   );
 };

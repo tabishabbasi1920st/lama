@@ -4,33 +4,28 @@ import { NavLink } from "react-router-dom";
 
 const sidebarLinks = [
   {
-    id: "PROJECTS",
-    name: "Projects",
+    id: "PROJECT",
+    name: "Project",
+    route: `/project-details`,
   },
   {
     id: "WIDGET_CONFIGURATION",
-    name: "Widget Configuration",
+    name: "Widget-Configuration",
+    route: `/widget-configuration`,
   },
   {
     id: "DEPLOYMENT",
     name: "Deployment",
+    route: `/deployment`,
   },
   {
     id: "PRICING",
     name: "Pricing",
+    route: `/pricing`,
   },
 ];
 
 const Sidebar = ({ children }) => {
-  const getPath = () => {
-    const url = new URL(window.location.href);
-    const path = url.pathname;
-
-    return `/${path.split("/")[1]}`;
-  };
-
-  getPath();
-
   return (
     <MainContainer>
       <SidebarContainer>
@@ -38,11 +33,9 @@ const Sidebar = ({ children }) => {
         <LinksContainer>
           {sidebarLinks.map((eachLink, index) => (
             <CustomNavLink
-              to={getPath()}
+              to={eachLink.route}
               key={eachLink.id}
-              activeClassName={
-                eachLink.name.toLowerCase() === getPath().slice(1)
-              }
+              activeClassName="active"
             >
               <div className="serial-no-div">{index + 1}</div>
               <p className="link-name">{eachLink.name}</p>
@@ -94,6 +87,11 @@ const CustomNavLink = styled(NavLink)`
   border-radius: 20px;
   padding: 7px;
   background-color: ${({ activeClassName }) => activeClassName && "#7E22CE"};
+
+  &:hover {
+    background-color: ${({ activeClassName }) =>
+      activeClassName ? "#7E22CE" : "#e2d8ee"};
+  }
 
   .serial-no-div {
     background-color: ${({ activeClassName }) =>

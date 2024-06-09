@@ -6,7 +6,7 @@ import CreateProjectModal from "../components/CreateProjectModal";
 import CreateNewProjectButton from "../components/CreateNewProjectButton";
 import ProjectsCard from "../components/ProjectsCard";
 
-import { LamaContext } from "../context/LamaContext.js";
+import { LamaContext } from "../context/lamaContext.js";
 import { useContext } from "react";
 
 const Projects = () => {

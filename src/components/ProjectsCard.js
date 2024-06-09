@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const ProjectsCard = ({ cardData }) => {
-  const { id, projectName, totalEpisodes, lastModified } = cardData;
+  const { projectName, totalEpisodes, lastModified } = cardData;
 
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const ProjectsCard = ({ cardData }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/projects/${id}`);
+    navigate(`/project-details`);
   };
 
   return (

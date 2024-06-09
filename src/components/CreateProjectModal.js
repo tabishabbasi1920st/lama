@@ -1,10 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate, useLocation } from "react-router-dom";
-import { LamaContext } from "../context/LamaContext";
+import { LamaContext } from "../context/lamaContext";
 
-const Modal = ({ closeModal, parentContRef }) => {
+const Modal = ({ closeModal }) => {
+  const mainContainerRef = useRef();
+
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+
+    if (mainContainerRef.current) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    return () => {
+      document.body.style.overflowY = "scroll";
+    };
+  }, []);
+
   const [inputValue, setInputValue] = useState("");
   const [errorTxt, setErrorTxt] = useState("");
 
@@ -86,7 +100,7 @@ const Modal = ({ closeModal, parentContRef }) => {
   };
 
   return (
-    <MainContainer height={parentContRef.current.offsetHeight}>
+    <MainContainer ref={mainContainerRef}>
       <Card>
         <h2 className="create-proj-heading">Create Project</h2>
         {renderLabelAndInputField()}
@@ -106,7 +120,7 @@ const MainContainer = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  height: ${({ height }) => `${height}px`};
+  height: 100vh;
   width: 100%;
   overflow: hidden;
   background-color: rgba(217, 217, 217, 0.7);

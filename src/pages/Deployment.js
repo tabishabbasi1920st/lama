@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
-import Deployment from "./Deployment";
-import Pricing from "./Pricing";
-import WidgetConfigurations from "./WidgetConfigurations";
 
-const ProjectDetails = () => {
+const Deployment = () => {
   return (
     <MainContainer>
       <Sidebar>tabish</Sidebar>
@@ -12,7 +9,7 @@ const ProjectDetails = () => {
   );
 };
 
-export default ProjectDetails;
+export default Deployment;
 
 const MainContainer = styled.div`
   overflow: hidden;
