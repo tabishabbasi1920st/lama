@@ -43,6 +43,7 @@ const Modal = ({ closeModal }) => {
       projectName: inputValue,
       totalEpisodes: 0,
       lastModified: "Last edited now",
+      projectFiles: [],
     };
 
     return newProject;
@@ -50,7 +51,6 @@ const Modal = ({ closeModal }) => {
 
   const handleFormSubmit = () => {
     if (formValidation() === true) {
-      console.log("new project form submit");
       setUserInfo((prevUserInfo) => ({
         ...prevUserInfo,
         projectList: [...prevUserInfo.projectList, addNewProject()],
@@ -61,7 +61,6 @@ const Modal = ({ closeModal }) => {
     }
   };
 
-  console.log(userInfo);
 
   const renderLabelAndInputField = () => {
     return (
@@ -130,16 +129,18 @@ const MainContainer = styled.div`
 `;
 
 const Card = styled.div`
-  height: 255px;
+  height: 300px;
   width: 700px;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
 
   .create-proj-heading {
     font-family: "Roboto";
+    font-size: 2rem;
+    color: #3c3c3c;
   }
 
   .error-txt {
@@ -161,15 +162,16 @@ const FieldContainer = styled.div`
 const CustomLabel = styled.label`
   display: block;
   font-family: "Roboto";
+  font-size: 1.2rem;
 `;
 
 const CustomInput = styled.input`
-  height: 40px;
+  height: 50px;
   width: 100%;
   border: 1px solid #999999;
   border-radius: 8px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.3rem;
   font-family: "Roboto";
 `;
 
@@ -182,11 +184,13 @@ const ButtonsContainer = styled.div`
 
 const CustomButton = styled.button`
   border: none;
+  height: 50px;
+  width: 100px;
   padding: 10px 10px 10px 10px;
   border-radius: 7px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ color }) => color};
-  font-size: 16px;
+  font-size: 1.2rem;
   font-weight: 400;
   font-family: "Roboto";
   display: flex;

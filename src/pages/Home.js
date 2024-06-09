@@ -89,6 +89,7 @@ const MainContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   background-color: #ffffff;
+  overflow: scroll;
 `;
 
 const Main = styled.main`
@@ -104,25 +105,25 @@ const Main = styled.main`
   .main-heading {
     color: #7e22ce;
     font-family: "Roboto", sans-serif;
-    font-size: 40px;
+    font-size: 3rem;
     text-align: center;
     margin: 10px 0px 10px 0px;
   }
 
   .banner-img {
-    width: 80vw;
+    width: 50vw;
     max-width: 500px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 
   .banner-para {
     padding: 0px 10% 0px 10%;
     text-align: center;
     font-family: "Roboto";
-    font-size: 1.3em;
+    font-size: 1.5rem;
     color: #838383;
   }
 
@@ -130,6 +131,7 @@ const Main = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
   }
 `;
 

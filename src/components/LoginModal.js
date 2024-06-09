@@ -65,6 +65,7 @@ const LoginModal = () => {
   return (
     <MainContainer ref={mainContainerRef}>
       <Card onSubmit={handleFormSubmit}>
+        <h1>Login</h1>
         <div className="input-field-holder">
           <Label>Username</Label>
           <Input
@@ -106,34 +107,35 @@ const MainContainer = styled.div`
 `;
 
 const Card = styled.form`
-  height: 260px;
-  width: 300px;
+  height: 375px;
+  width: 500px;
   background-color: #fff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  gap: 20px;
+  padding: 25px;
   font-family: "Roboto";
 
   .input-field-holder {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
   }
 `;
 
 const Label = styled.label`
   display: block;
+  font-size: 1.2rem;
 `;
 
 const Input = styled.input`
-  height: 40px;
+  height: 50px;
   border-radius: 5px;
   border: 1px solid #3c3c3c;
   width: 100%;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.2rem;
 `;
 
 const ErrorTxt = styled.p`

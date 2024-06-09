@@ -1,7 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
+import { LamaContext } from "../context/lamaContext";
+import { v4 as uuidv4 } from "uuid";
 
 const AddProjectFileModal = ({ closeProjectFileModal }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+  });
+  const [errorTxt, setErrorTxt] = useState("");
+
+  const { setUserInfo } = useContext(LamaContext);
+  const url = new URL(window.location.href);
+  const path = url.pathname;
+  const projectId = path.split("/")[2];
+
   useEffect(() => {
     document.body.style.overflowY = "hidden";
 
@@ -9,6 +22,75 @@ const AddProjectFileModal = ({ closeProjectFileModal }) => {
       document.body.style.overflowY = "scroll";
     };
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const formValidation = () => {
+    const { name, description } = formData;
+
+    if (name === "") {
+      setErrorTxt("Please fill form correctly");
+      return false;
+    } else if (description === "") {
+      setErrorTxt("Please fill form correctly");
+      return false;
+    }
+
+    setErrorTxt("");
+    return true;
+  };
+
+  const formatDate = () => {
+    const date = new Date();
+    const options = { day: "2-digit", month: "short", year: "2-digit" };
+    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
+      date
+    );
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+
+    const formattedTime = `${hours}:${minutes}`;
+
+    return `${formattedDate} | ${formattedTime}`;
+  };
+
+  const addNewFile = () => {
+    const { name, description } = formData;
+    const newFile = {
+      id: uuidv4(),
+      name,
+      description,
+      dateTime: formatDate(),
+      status: "Done",
+    };
+
+    return newFile;
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (formValidation()) {
+      setUserInfo((prevUserInfo) => ({
+        ...prevUserInfo,
+        projectList: prevUserInfo.projectList.map((eachProject) => {
+          if (eachProject.id === projectId) {
+            return {
+              ...eachProject,
+              projectFiles: [...eachProject.projectFiles, addNewFile()],
+            };
+          }
+          return eachProject;
+        }),
+      }));
+      closeProjectFileModal();
+    }
+  };
 
   return (
     <MainContainer>
@@ -36,15 +118,28 @@ const AddProjectFileModal = ({ closeProjectFileModal }) => {
             </svg>
           </CloseButton>
         </div>
-        <Wrapper>
-          <Label>Name</Label>
-          <Input />
-        </Wrapper>
-        <Wrapper>
-          <Label>Description</Label>
-          <Input />
-        </Wrapper>
-        <Button>Save</Button>
+        <form className="file-upload-form" onSubmit={handleFormSubmit}>
+          <Wrapper>
+            <Label>Name</Label>
+            <Input
+              name="name"
+              type="text"
+              onChange={handleChange}
+              placeholder="Enter name"
+            />
+          </Wrapper>
+          <Wrapper>
+            <Label>Description</Label>
+            <Input
+              name="description"
+              type="text"
+              onChange={handleChange}
+              placeholder="Enter description"
+            />
+          </Wrapper>
+          <ErrorTxt>{errorTxt}</ErrorTxt>
+          <Button type="submit">Save</Button>
+        </form>
       </Card>
     </MainContainer>
   );
@@ -68,7 +163,7 @@ const MainContainer = styled.div`
 `;
 
 const Card = styled.div`
-  height: 350px;
+  height: 400px;
   width: 800px;
   background-color: #fff;
   border-radius: 10px;
@@ -81,11 +176,20 @@ const Card = styled.div`
     color: #3c3c3c;
     font-size: 1.7rem;
   }
+
+  .file-upload-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+  }
 `;
 
 const CloseButton = styled.button`
   border: none;
   background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -113,8 +217,18 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  height: 40px;
+  height: 50px;
   width: 100%;
   border-radius: 5px;
   border: 1px solid #3c3c3c;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  outline: none;
+`;
+
+const ErrorTxt = styled.p`
+  color: red;
+  font-size: 1rem;
+  font-weight: 600;
 `;

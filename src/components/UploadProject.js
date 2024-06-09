@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import PathNavbar from "./PathNavbar";
-import { LamaContext } from "../context/lamaContext.js";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import UploadCard from "./UploadCard.js";
 import AddProjectFileModal from "./AddProjectFileModal.js";
 
@@ -21,28 +20,28 @@ const cards = [
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717920202/Frame_2_eykils.png",
   },
   {
-    id: "YOUTUBE",
+    id: "RSS_FEED",
     primaryText: "Upload",
     secondaryText: "RSS Feed",
     iconUrl:
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717920231/image_1_oy0lgk.png",
   },
   {
-    id: "YOUTUBE",
+    id: "YOUTUBE1",
     primaryText: "Upload",
     secondaryText: "Youtube Video",
     iconUrl:
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717919626/Frame_1_1_crer9p.png",
   },
   {
-    id: "SPOTIFY",
+    id: "SPOTIFY1",
     primaryText: "Upload",
     secondaryText: "Spotify Podcast",
     iconUrl:
       "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717920202/Frame_2_eykils.png",
   },
   {
-    id: "YOUTUBE",
+    id: "RSS_FEED1",
     primaryText: "Upload",
     secondaryText: "RSS Feed",
     iconUrl:
@@ -50,21 +49,7 @@ const cards = [
   },
 ];
 
-const UploadProject = () => {
-  const { userInfo } = useContext(LamaContext);
-
-  const url = new URL(window.location.href);
-  const path = url.pathname;
-  const projectId = path.split("/")[2];
-  console.log(projectId);
-
-  const activeProject = userInfo.projectList.filter(
-    (eachProject) => eachProject.id === projectId
-  )[0];
-
-  const { projectName } = activeProject;
-  // current url
-
+const UploadProject = ({ projectName }) => {
   const [projectFileModal, setProjectFileModal] = useState(false);
 
   const openProjectFileModal = () => {
