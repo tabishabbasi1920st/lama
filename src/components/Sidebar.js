@@ -59,8 +59,8 @@ const MainContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 400px;
+  min-width: 400px;
   height: 100vh;
   background-color: #f3e8ff;
   padding: 0px 5px 0px 5px;

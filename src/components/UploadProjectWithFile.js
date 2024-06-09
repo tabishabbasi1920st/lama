@@ -29,7 +29,14 @@ const cards = [
   },
 ];
 
-const UploadProject = ({ projectName, projectFiles }) => {
+const UploadProject = ({
+  projectName,
+  projectFiles,
+  setUserInfo,
+  projectId,
+  setFileEdit,
+  setEditableFileId,
+}) => {
   const [projectFileModal, setProjectFileModal] = useState(false);
 
   const openProjectFileModal = () => {
@@ -41,11 +48,28 @@ const UploadProject = ({ projectName, projectFiles }) => {
   };
 
   const handleEdit = (id) => {
+    setFileEdit(true);
+    setEditableFileId(id);
     console.log("id for edit", id);
   };
 
   const handleDelete = (id) => {
-    console.log("id for delete", id);
+    setUserInfo((prevState) => {
+      const updatedProjectList = prevState.projectList.map((project) => {
+        if (project.id === projectId) {
+          return {
+            ...project,
+            projectFiles: project.projectFiles.filter((file) => file.id !== id),
+          };
+        }
+        return project;
+      });
+
+      return {
+        ...prevState,
+        projectList: updatedProjectList,
+      };
+    });
   };
 
   const renderBannerStrip = () => {
@@ -211,3 +235,30 @@ const DeleteButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+const lama_user = {
+  username: "Tabish abbasi",
+  email: "tabishabbasi1920st@gmail.com",
+  projectList: [
+    {
+      projectId: "17d8c664-b57b-40ff-aceb-d8218946b48b",
+      projectName: "Sample Project",
+      projectFiles: [
+        {
+          id: "1",
+          name: "My file",
+          description: "This is file in which i have resigned",
+          dateTime: "09 Jun 24 | 20:00",
+          status: "Done",
+        },
+        {
+          id: "2",
+          name: "Your file",
+          description: "This is file in which i have Join",
+          dateTime: "10 Jun 24 | 20:00",
+          status: "Done",
+        },
+      ],
+    },
+  ],
+};

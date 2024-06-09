@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import UploadProject from "./UploadProject";
 import UploadProjectWithFile from "./UploadProjectWithFile";
+import EditTranscript from "./EditTranscript";
 import { LamaContext } from "../context/lamaContext";
 import { useContext, useState } from "react";
 
 const Project = () => {
-  const { userInfo } = useContext(LamaContext);
+  const { userInfo, setUserInfo } = useContext(LamaContext);
+  const [fileEdit, setFileEdit] = useState(false);
+  const [EditableFileId, setEditableFileId] = useState("");
 
   // current url
   const url = new URL(window.location.href);
   const path = url.pathname;
   const projectId = path.split("/")[2];
-
-  console.log("......projectid", projectId);
-  console.log("......user info", userInfo);
 
   const activeProject = userInfo.projectList.filter(
     (eachProject) => eachProject.id === projectId
@@ -22,14 +22,30 @@ const Project = () => {
   const { projectName } = activeProject;
 
   const renderAppropriateView = () => {
+    const projectFiles = activeProject.projectFiles;
     if (activeProject.projectFiles.length === 0) {
       return <UploadProject projectName={projectName} />;
+    } else if (activeProject.projectFiles.length !== 0 && fileEdit) {
+      return (
+        <EditTranscript
+          projectName={projectName}
+          projectFiles={projectFiles}
+          EditableFileId={EditableFileId}
+          setFileEdit={setFileEdit}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+          projectId={projectId}
+        />
+      );
     } else {
-      const projectFiles = activeProject.projectFiles;
       return (
         <UploadProjectWithFile
           projectName={projectName}
           projectFiles={projectFiles}
+          setUserInfo={setUserInfo}
+          projectId={projectId}
+          setFileEdit={setFileEdit}
+          setEditableFileId={setEditableFileId}
         />
       );
     }
