@@ -32,7 +32,7 @@ const ProjectDetails = () => {
         return <Deployment />;
       case sidebarLinksConstants.pricing:
         return <Pricing />;
-      case sidebarLinksConstants:
+      case sidebarLinksConstants.settings:
         return <Settings />;
       default:
         return null;

@@ -51,10 +51,8 @@ const LoginModal = () => {
     e.preventDefault();
 
     if (formValidation()) {
-      const { username, email } = loginForm;
       const userInfo = {
-        username,
-        email,
+        credentials: { ...loginForm },
         projectList: [],
         generalConfiguration: {
           chatbotName: "",
