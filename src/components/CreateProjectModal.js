@@ -61,7 +61,6 @@ const Modal = ({ closeModal }) => {
     }
   };
 
-
   const renderLabelAndInputField = () => {
     return (
       <FieldContainer>

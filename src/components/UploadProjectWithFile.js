@@ -50,7 +50,6 @@ const UploadProject = ({
   const handleEdit = (id) => {
     setFileEdit(true);
     setEditableFileId(id);
-    console.log("id for edit", id);
   };
 
   const handleDelete = (id) => {

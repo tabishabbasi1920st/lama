@@ -56,6 +56,23 @@ const LoginModal = () => {
         username,
         email,
         projectList: [],
+        generalConfiguration: {
+          chatbotName: "",
+          welcomeMessage: "",
+          inputPlaceholder: "",
+        },
+        displayConfiguration: {
+          primaryColor: "#7BD568",
+          fontColor: "#3C3C3C",
+          fontSize: 25,
+          chatHeight: "LoremIpsuim",
+          showResources: true,
+          chatIconSize: "Small",
+          positionOnScreen: "Bottom Right",
+          distance: 20,
+          horizontalDistance: 20,
+          botIconUrl: "",
+        },
       };
 
       setUserInfo(userInfo);
