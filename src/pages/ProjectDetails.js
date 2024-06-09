@@ -12,6 +12,7 @@ const sidebarLinksConstants = {
   widgetConfiguration: "WIDGET_CONFIGURATION",
   deployment: "DEPLOYMENT",
   pricing: "PRICING",
+  settings: "SETTINGS",
 };
 
 const ProjectDetails = () => {
@@ -23,6 +24,8 @@ const ProjectDetails = () => {
 
   const getAppropriateComponent = () => {
     switch (activeLink) {
+      case sidebarLinksConstants.project:
+        return <Project />;
       case sidebarLinksConstants.widgetConfiguration:
         return <WidgetConfigurations />;
       case sidebarLinksConstants.deployment:
@@ -32,7 +35,7 @@ const ProjectDetails = () => {
       case sidebarLinksConstants:
         return <Settings />;
       default:
-        return <Project />;
+        return null;
     }
   };
 
@@ -49,7 +52,7 @@ export default ProjectDetails;
 
 const MainContainer = styled.div`
   border: 2px solid hidden;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 `;
