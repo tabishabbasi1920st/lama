@@ -49,6 +49,7 @@ const UploadProject = ({
 
   const handleDiscard = () => {
     setEdit(true);
+    setFileEdit(false);
   };
 
   const handleTextAreaChange = (e) => {
