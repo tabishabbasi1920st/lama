@@ -39,6 +39,8 @@ const UploadProject = ({
 }) => {
   const [projectFileModal, setProjectFileModal] = useState(false);
 
+  console.log(projectFiles);
+
   const openProjectFileModal = () => {
     setProjectFileModal(true);
   };

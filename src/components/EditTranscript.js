@@ -31,6 +31,7 @@ const UploadProject = ({
                   description: (file.description = inputValue),
                 };
               }
+              return file;
             }),
           };
         }
@@ -47,7 +48,7 @@ const UploadProject = ({
   };
 
   const handleDiscard = () => {
-    setEdit(true)
+    setEdit(true);
   };
 
   const handleTextAreaChange = (e) => {
