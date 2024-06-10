@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const UploadCard = ({
-  cardDetails,
-  openProjectFileModal
-}) => {
+const UploadCard = ({ cardDetails, openProjectFileModal }) => {
   const { iconUrl, primaryText, secondaryText } = cardDetails;
 
   const handleCardClick = () => {
@@ -29,7 +26,6 @@ export default UploadCard;
 const MainContainer = styled.li`
   border: 2px solid blue;
   border-radius: 10px;
-  height: 125px;
   width: 30%;
   display: flex;
   align-items: center;
@@ -81,5 +77,9 @@ const Details = styled.div`
 const CustomTxt = styled.p`
   color: #3c3c3c;
   font-weight: 600;
-  font-size: 1.4em;
+  font-size: 1rem;
+
+  @media screen and (min-width:576px){
+    font-size: 1.2rem;
+  }
 `;

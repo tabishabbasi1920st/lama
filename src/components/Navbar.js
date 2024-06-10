@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { LamaContext } from "../context/lamaContext";
+import { useContext } from "react";
 
 const logoUrl =
   "https://res.cloudinary.com/dctfbwk0m/image/upload/v1717774516/directright_evbeu5.png";
@@ -20,6 +23,8 @@ const navLinks = [
 ];
 
 const Navbar = ({ showLinks }) => {
+  const { isSidebarOpen, setIsSidebarOpen } = useContext(LamaContext);
+
   const getLinkItem = (link) => {
     const { id, route, iconUrl } = link;
     return (
@@ -35,6 +40,12 @@ const Navbar = ({ showLinks }) => {
     <MainContainer>
       <LogoImg src={logoUrl} alt="logo" />
       <LogoTxt>LAMA.</LogoTxt>
+      {!showLinks && (
+        <HamButton onClick={() => setIsSidebarOpen(false)}>
+          <GiHamburgerMenu />
+        </HamButton>
+      )}
+
       {showLinks && (
         <LinksContainer>
           {navLinks.map((eachLink) => getLinkItem(eachLink))}
@@ -76,4 +87,20 @@ const LinksContainer = styled.ul`
 const LinkIcon = styled.img`
   height: 35px;
   width: 35px;
+`;
+
+const HamButton = styled.button`
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #3c3c3c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
 `;

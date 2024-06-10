@@ -61,7 +61,11 @@ const MainContainer = styled.div`
   width: 100%;
   /* border: 2px solid red; */
   overflow: auto;
-  padding: 25px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width: 576px) {
+    padding: 25px;
+  }
 `;

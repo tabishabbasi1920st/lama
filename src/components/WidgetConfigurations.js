@@ -85,8 +85,12 @@ const MainContainer = styled.div`
   height: 100vh;
   width: 100%;
   overflow: auto;
-  padding: 25px;
+  padding: 10px;
   font-family: "Roboto";
+
+  @media screen and (min-width: 576px) {
+    padding: 25px;
+  }
 `;
 
 const ConfigurationHeading = styled.h1`
@@ -95,7 +99,7 @@ const ConfigurationHeading = styled.h1`
 `;
 
 const TabContainer = styled.ul`
-  margin: 50px 0px 20px 0px;
+  margin: 15px 0px 20px 0px;
   height: 50px;
   display: flex;
   gap: 25px;
@@ -103,7 +107,7 @@ const TabContainer = styled.ul`
 
 const TabItem = styled.li`
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   display: flex;
   align-items: center;
   border-bottom: ${({ selected }) => (selected ? "5px solid #7E22CE" : "")};

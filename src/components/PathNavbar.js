@@ -1,26 +1,43 @@
 import styled from "styled-components";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { LamaContext } from "../context/lamaContext";
+import { useContext } from "react";
 
 const PathNavbar = ({ projectName, route }) => {
+  const { isSidebarOpen, setIsSidebarOpen } = useContext(LamaContext);
+
+  const renderHamButton = () => {
+    return (
+      <HamButton onClick={() => setIsSidebarOpen(true)}>
+        <GiHamburgerMenu />
+      </HamButton>
+    );
+  };
+
   return (
     <MainContainer>
       <LeftContainer>
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 52 52"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M26.0002 13.4116L36.8335 23.1616V40.0833H32.5002V27.0833H19.5002V40.0833H15.1668V23.1616L26.0002 13.4116ZM26.0002 7.58331L4.3335 27.0833H10.8335V44.4166H23.8335V31.4166H28.1668V44.4166H41.1668V27.0833H47.6668L26.0002 7.58331Z"
-            fill="#7E22CE"
-          />
-        </svg>
+        <LargeHamContainer style={{}}>{renderHamButton()}</LargeHamContainer>
 
-        <span className="path-span" style={{ color: "#999999" }}>
-          / {projectName} &nbsp;/
-        </span>
-        <span className="path-span"> {route}</span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 52 52"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.0002 13.4116L36.8335 23.1616V40.0833H32.5002V27.0833H19.5002V40.0833H15.1668V23.1616L26.0002 13.4116ZM26.0002 7.58331L4.3335 27.0833H10.8335V44.4166H23.8335V31.4166H28.1668V44.4166H41.1668V27.0833H47.6668L26.0002 7.58331Z"
+              fill="#7E22CE"
+            />
+          </svg>
+
+          <span className="path-span" style={{ color: "#999999" }}>
+            / {projectName} &nbsp;/
+          </span>
+          <span className="path-span"> {route}</span>
+        </div>
       </LeftContainer>
 
       <RightContainer>
@@ -61,12 +78,17 @@ const PathNavbar = ({ projectName, route }) => {
 export default PathNavbar;
 
 const MainContainer = styled.header`
-  height: 50px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    align-items: self-start;
+    gap: 10px;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -74,11 +96,21 @@ const LeftContainer = styled.div`
   align-items: center;
   gap: 10px;
 
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
   .path-span {
     font-weight: 500;
     font-family: "Roboto";
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #7e22ce;
+
+    @media screen and (min-width: 576px) {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -86,9 +118,35 @@ const RightContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const Img = styled.img`
   height: 30px;
   width: 30px;
+`;
+
+const HamButton = styled.button`
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #3c3c3c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+const LargeHamContainer = styled.div`
+  /* display: none; */
+  /* @media screen and (min-width: 576px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  } */
 `;

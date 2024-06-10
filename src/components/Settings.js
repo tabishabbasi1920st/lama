@@ -113,7 +113,7 @@ const MainContainer = styled.div`
 `;
 
 const MainHeading = styled.h1`
-  font-size: 3rem;
+  font-size: 1.5rem;
   color: #7e22c3;
   margin-bottom: 25px;
 `;
@@ -122,6 +122,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+  }
 `;
 
 const LabelAndInputFiledWrapper = styled.div`
@@ -129,6 +133,10 @@ const LabelAndInputFiledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const Label = styled.label`
@@ -149,7 +157,7 @@ const Input = styled.input`
 `;
 
 const BannerStrip = styled.div`
-  height: 80px;
+  padding: 10px;
   background-image: linear-gradient(to right, #7e22ce, #460282);
   border-radius: 10px;
   display: flex;
@@ -165,8 +173,7 @@ const BannerStrip = styled.div`
 
   .try-it-out-btn {
     font-family: "Roboto";
-    height: 30px;
-    width: 100px;
+    padding: 5px;
     border-radius: 5px;
     border: none;
     background-color: #fff;

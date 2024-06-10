@@ -95,7 +95,7 @@ const FiledWrapper = styled.div`
 
 const Label = styled.label`
   display: block;
-  font-size: 22px;
+  font-size: 18px;
   color: #3c3c3c;
   font-weight: 600;
 `;

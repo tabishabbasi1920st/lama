@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LamaContext } from "../context/lamaContext";
 
 const sidebarLinks = [
   {
@@ -27,6 +28,7 @@ const sidebarLinks = [
 
 const Sidebar = ({ children, getActiveLinkId }) => {
   const [activeLink, setActiveLink] = useState(sidebarLinks[0].id);
+  const { isSidebarOpen, setIsSidebarOpen } = useContext(LamaContext);
 
   const renderSettingIcon = () => {
     return (
@@ -55,15 +57,24 @@ const Sidebar = ({ children, getActiveLinkId }) => {
     );
   };
 
+  const isDisabled = (linkId) => {
+    if (linkId == "DEPLOYMENT" || linkId === "PRICING") {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <MainContainer>
-      <SidebarContainer>
+      <SidebarContainer isOpen={isSidebarOpen}>
         <Navbar />
         <LinksContainer>
           {sidebarLinks.map((eachLink, index) => (
             <CustomNavLink
               key={eachLink.id}
               activeClassName={eachLink.id === activeLink}
+              disabled={isDisabled(eachLink.id)}
               onClick={() => {
                 setActiveLink(eachLink.id);
                 getActiveLinkId(eachLink.id);
@@ -94,13 +105,19 @@ const MainContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  max-width: 400px;
-  min-width: 400px;
   height: 100vh;
+  min-width: 100vw;
   background-color: #f3e8ff;
   padding: 0px 5px 0px 5px;
   display: flex;
   flex-direction: column;
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  position: ${({ isOpen }) => (isOpen ? "absolute" : "static")};
+
+  @media screen and (min-width: 1024px) {
+    min-width: 350px;
+    position: static;
+  }
 `;
 
 const MainSection = styled.main`
@@ -115,14 +132,16 @@ const LinksContainer = styled.ul`
   gap: 5px;
   flex-grow: 1;
   padding-bottom: 10px;
+  height: 90vh;
 
-  & > li:last-child {
+  & > button:last-child {
     margin-top: auto;
   }
 `;
 
-const CustomNavLink = styled.li`
+const CustomNavLink = styled.button`
   display: flex;
+  border: none;
   height: 50px;
   gap: 15px;
   align-items: center;

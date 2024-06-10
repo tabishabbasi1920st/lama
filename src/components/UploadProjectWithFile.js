@@ -84,35 +84,31 @@ const UploadProject = ({
 
   const renderProjectFileContainer = () => {
     return (
-      <FilesContainer>
-        <Table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Upload Date & Time</th>
-              <th>Status</th>
-              <th>Actions</th>
+      <Table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Upload Date & Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projectFiles.map((row, index) => (
+            <tr key={index}>
+              <td>{row.name}</td>
+              <td>{row.dateTime}</td>
+              <td>{row.status}</td>
+              <td>
+                <EditButton onClick={() => handleEdit(row.id)}>Edit</EditButton>
+                <DeleteButton onClick={() => handleDelete(row.id)}>
+                  Delete
+                </DeleteButton>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {projectFiles.map((row, index) => (
-              <tr key={index}>
-                <td>{row.name}</td>
-                <td>{row.dateTime}</td>
-                <td>{row.status}</td>
-                <td>
-                  <EditButton onClick={() => handleEdit(row.id)}>
-                    Edit
-                  </EditButton>
-                  <DeleteButton onClick={() => handleDelete(row.id)}>
-                    Delete
-                  </DeleteButton>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </FilesContainer>
+          ))}
+        </tbody>
+      </Table>
     );
   };
 
@@ -123,6 +119,7 @@ const UploadProject = ({
       <Cards>
         {cards.map((eachCard) => (
           <UploadCard
+            small={true}
             openProjectFileModal={openProjectFileModal}
             cardDetails={eachCard}
             key={eachCard.id}
@@ -155,7 +152,6 @@ const Cards = styled.ul`
 `;
 
 const BannerStrip = styled.div`
-  height: 60px;
   width: 100%;
   background-color: #7e22ce;
   border-radius: 10px;
@@ -165,14 +161,14 @@ const BannerStrip = styled.div`
   padding: 15px 30px 15px 30px;
 
   .banner-strip-para {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #fff;
     font-family: "Roboto";
   }
 
   .try-it-out-btn {
     font-family: "Roboto";
-    height: 30px;
+    padding: 5px;
     width: 100px;
     border-radius: 5px;
     border: none;
@@ -186,19 +182,19 @@ const BannerStrip = styled.div`
   }
 `;
 
-const FilesContainer = styled.div`
+const Table = styled.table`
   margin-top: 30px;
   border: 1px solid #999999;
   border-radius: 10px;
-`;
-
-const Table = styled.table`
   border-collapse: collapse;
   margin: 25px 0;
-  font-size: 1.5em;
-  min-width: 320px;
-  width: 100%;
+  font-size: 1em;
+  max-width: 100%;
   font-family: "Roboto";
+  overflow-x: scroll;
+  @media screen and (min-width: 576px) {
+    font-size: 1.3rem;
+  }
 
   thead tr {
     text-align: center;
@@ -223,6 +219,7 @@ const EditButton = styled.button`
   font-family: "Roboto";
   border: none;
   cursor: pointer;
+  background-color: "red";
 `;
 
 const DeleteButton = styled.button`
@@ -233,31 +230,5 @@ const DeleteButton = styled.button`
   font-family: "Roboto";
   border: none;
   cursor: pointer;
+  background-color: "#fff";
 `;
-
-const lama_user = {
-  username: "Tabish abbasi",
-  email: "tabishabbasi1920st@gmail.com",
-  projectList: [
-    {
-      projectId: "17d8c664-b57b-40ff-aceb-d8218946b48b",
-      projectName: "Sample Project",
-      projectFiles: [
-        {
-          id: "1",
-          name: "My file",
-          description: "This is file in which i have resigned",
-          dateTime: "09 Jun 24 | 20:00",
-          status: "Done",
-        },
-        {
-          id: "2",
-          name: "Your file",
-          description: "This is file in which i have Join",
-          dateTime: "10 Jun 24 | 20:00",
-          status: "Done",
-        },
-      ],
-    },
-  ],
-};

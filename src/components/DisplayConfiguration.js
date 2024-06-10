@@ -8,8 +8,6 @@ const DisplayConfiguration = ({ userInfo, setUserInfo }) => {
     ...userInfo.displayConfiguration,
   });
 
-  console.log(formData);
-
   const formDataRef = useRef(formData);
   useEffect(() => {
     formDataRef.current = formData;
@@ -269,7 +267,7 @@ const FieldWrapper = styled.div`
 
 const Label = styled.label`
   display: block;
-  font-size: 22px;
+  font-size: 18px;
   color: #3c3c3c;
   font-weight: 600;
 `;
@@ -292,6 +290,7 @@ const Input = styled.input`
 const RandomTxt = styled.p`
   font-weight: 400;
   color: #646464;
+  font-size: 14px;
 `;
 
 const ToggleContainer = styled.div`

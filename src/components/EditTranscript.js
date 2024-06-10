@@ -131,7 +131,7 @@ const UploadProject = ({
 export default UploadProject;
 
 const EditTranscriptHeading = styled.h1`
-  font-size: 3rem;
+  font-size: 1%.2;
   color: #7e22c3;
 `;
 
@@ -139,6 +139,11 @@ const HeadingAndButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 
   .btns-container {
     display: flex;
