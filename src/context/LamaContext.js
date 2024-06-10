@@ -86,13 +86,13 @@ const LamaContextProvider = ({ children }) => {
       setWindowWidth(newWidth);
       setWindowHeight(newHeight);
 
-      if (newWidth < 1024) {
+      if (newWidth < 1023) {
         handleWidthLessThan1024();
       }
     };
 
     // Check initial width
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1023) {
       handleWidthLessThan1024();
     }
 
