@@ -1,23 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ToggleSwitch from "./ToggleSwitch";
-
-const x = {
-  primaryColor: "",
-  fontColor: "",
-  fontSize: "",
-  chatHeight: "",
-  showSources: true,
-  chatIconSize: "",
-  positionOnScreen: "",
-  distanceFromBottom: "",
-  horizontalDistance: "",
-};
+import UploadBoatImg from "./UploadBoatImg";
 
 const DisplayConfiguration = ({ userInfo, setUserInfo }) => {
   const [formData, setFormData] = useState({
     ...userInfo.displayConfiguration,
   });
+
+  console.log(formData);
 
   const formDataRef = useRef(formData);
   useEffect(() => {
@@ -36,6 +27,7 @@ const DisplayConfiguration = ({ userInfo, setUserInfo }) => {
         positionOnScreen,
         distanceFromBottom,
         horizontalDistance,
+        chatBotUrl,
       } = formDataRef.current;
       setUserInfo((prevData) => ({
         ...prevData,
@@ -50,6 +42,7 @@ const DisplayConfiguration = ({ userInfo, setUserInfo }) => {
           positionOnScreen,
           distanceFromBottom,
           horizontalDistance,
+          chatBotUrl,
         },
       }));
     };
@@ -203,25 +196,13 @@ const DisplayConfiguration = ({ userInfo, setUserInfo }) => {
     );
   };
 
-  const renderBotIconContainer = () => {
-    return (
-      <BotContainer>
-        <BotDp></BotDp>
-        <div>
-          <UploadImageButton>Upload Image</UploadImageButton>
-          <p className="recommended-txt">Recommended Size: 48x48px</p>
-        </div>
-      </BotContainer>
-    );
-  };
-
   return (
     <MainContainer>
       {renderFirstSection()}
       <h1 className="chat-icon-heading">Chat Icon</h1>
       {renderSecondSection()}
       <h1 className="bot-icon-heading">Bot Icon</h1>
-      {renderBotIconContainer()}
+      <UploadBoatImg formData={formData} setFormData={setFormData} />
     </MainContainer>
   );
 };
@@ -343,37 +324,4 @@ const ChatIconSizeSelector = styled.div`
       width: 98%;
     }
   }
-`;
-
-const BotContainer = styled.div`
-  /* border: 2px solid red; */
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 10px;
-
-  .recommended-txt {
-    font-size: 14px;
-    margin-top: 5px;
-    color: #3c3c3c;
-  }
-`;
-
-const BotDp = styled.div`
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  background-color: #d9d9d9;
-`;
-
-const UploadImageButton = styled.button`
-  height: 50px;
-  width: 150px;
-  font-size: 1.1rem;
-  font-family: "Roboto";
-  background-color: #7e22ce;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
 `;

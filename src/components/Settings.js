@@ -9,7 +9,6 @@ const Settings = () => {
 
   useEffect(() => {
     return () => {
-      console.log("leaving..", formData);
       setUserInfo((prevData) => ({
         ...prevData,
         credentials: { ...prevData.credentials, ...formData },

@@ -59,8 +59,6 @@ const GeneralConfiguration = ({ userInfo, setUserInfo }) => {
     }));
   };
 
-  console.log(">>>>>>',", formData);
-
   return (
     <MainContainer>
       {inputFieldList.map((eachField) => (

@@ -69,6 +69,7 @@ const LoginModal = () => {
           positionOnScreen: "Option 1",
           distanceFromBottom: 20,
           horizontalDistance: 20,
+          chatBotUrl:""
         },
       };
 
