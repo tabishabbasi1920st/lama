@@ -25,6 +25,10 @@ const UploadBoatImg = ({ formData, setFormData }) => {
       const response = await fetch(api, options);
       const fetchedData = await response.json();
       const { secure_url } = fetchedData;
+      setFormData((prevData) => ({
+        ...prevData,
+        chatBotUrl: secure_url,
+      }));
       setLoading(false);
       return secure_url;
     } catch (error) {
@@ -36,10 +40,6 @@ const UploadBoatImg = ({ formData, setFormData }) => {
     try {
       setLoading(true);
       const imageUrl = await uploadFile("image");
-      setFormData((prevData) => ({
-        ...prevData,
-        chatBotUrl: imageUrl,
-      }));
     } catch (error) {
       console.error(error);
     }
